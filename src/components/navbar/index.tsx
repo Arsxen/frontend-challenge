@@ -1,15 +1,10 @@
 'use client'
 
-import {
-  ActionIcon,
-  Autocomplete,
-  type ComboboxItem,
-  Select,
-} from '@mantine/core'
+import { ActionIcon, Autocomplete } from '@mantine/core'
 import { useDebouncedCallback } from '@mantine/hooks'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { type PropsWithChildren, useState } from 'react'
+import type { PropsWithChildren } from 'react'
 import { FaAngleLeft, FaMagnifyingGlass } from 'react-icons/fa6'
 import { useSearch } from 'src/hooks/api'
 import { AppSettings } from '../app-settings'

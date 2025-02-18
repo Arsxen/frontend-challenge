@@ -1,10 +1,10 @@
 'use client'
 
 import { Flex, Text, Title } from '@mantine/core'
-import dayjs from 'dayjs'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { NavSearchBar, Navbar } from 'src/components/navbar'
+import dayjs from 'src/extended-dayjs'
 import { useCurrentWeather } from 'src/hooks/api'
 import { useFavoritedCities } from 'src/hooks/local-storage'
 import { useTemparatureFormatter } from 'src/hooks/temparature-formatter'
@@ -31,7 +31,11 @@ function CityListItem({ code }: { code: string }) {
     >
       <div>
         <Title order={3}>{data.name}</Title>
-        <Text>{dayjs().utcOffset(data.timezone).format('HH:mm')}</Text>
+        <Text>
+          {dayjs()
+            .utcOffset(data.timezone / 60)
+            .format('HH:mm')}
+        </Text>
       </div>
       <Flex align="center">
         <Image

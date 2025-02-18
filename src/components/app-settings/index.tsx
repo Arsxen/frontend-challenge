@@ -1,9 +1,8 @@
-import { ActionIcon, Drawer, Popover, Select } from '@mantine/core'
-import { useDisclosure, useLocalStorage } from '@mantine/hooks'
+import { ActionIcon, Popover, Select } from '@mantine/core'
 import { useState } from 'react'
 import { FaGear } from 'react-icons/fa6'
 import { useAppSettings } from 'src/hooks/local-storage'
-import type { Settings, UnitOfMeasurement } from 'src/types/settings'
+import type { UnitOfMeasurement } from 'src/types/settings'
 
 export function AppSettings() {
   const [opened, setOpened] = useState(false)
