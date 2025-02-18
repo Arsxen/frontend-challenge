@@ -1,0 +1,12 @@
+.navbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+  height: 70px;
+}
+
+.search-bar {
+  flex: 1;
+}

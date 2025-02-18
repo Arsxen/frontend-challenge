@@ -1,0 +1,12 @@
+.city-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+  cursor: pointer;
+}
+
+.city-list-item:hover {
+  background-color: var(--mantine-color-default-hover);
+}

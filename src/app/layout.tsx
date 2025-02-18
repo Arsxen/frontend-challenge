@@ -1,10 +1,13 @@
-import type { Metadata } from 'next'
 import '@mantine/core/styles.css'
+
 import {
   ColorSchemeScript,
   MantineProvider,
   mantineHtmlProps,
 } from '@mantine/core'
+import type { Metadata } from 'next'
+import { Suspense } from 'react'
+import { ApiProvider } from 'src/api/provider'
 
 export const metadata: Metadata = {
   title: 'Weather App',
@@ -22,7 +25,11 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <Suspense>
+          <ApiProvider>
+            <MantineProvider>{children}</MantineProvider>
+          </ApiProvider>
+        </Suspense>
       </body>
     </html>
   )
