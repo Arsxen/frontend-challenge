@@ -53,6 +53,7 @@ export default function CityWeather() {
                 color="pink"
                 size="sm"
                 onClick={removeFromFavoritedCities}
+                data-testid="favorite"
               >
                 <FaHeart style={{ width: '100%', height: '100%' }} />
               </ActionIcon>
@@ -62,6 +63,7 @@ export default function CityWeather() {
                 color="dark"
                 size="sm"
                 onClick={addToFavoritedCities}
+                data-testid="favorite"
               >
                 <FaRegHeart style={{ width: '100%', height: '100%' }} />
               </ActionIcon>

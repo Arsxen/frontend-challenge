@@ -1,6 +1,7 @@
 import { MantineProvider } from '@mantine/core'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { queryKey } from 'src/api/query-key'
 import currentBangkokJson from '../../../mock-data/current-weather/bangkok.json'
 import forecastBangkokJson from '../../../mock-data/forecast/bangkok.json'
@@ -64,7 +65,26 @@ describe('City page', () => {
     expect(screen.getByText('1000 hPa')).toBeInTheDocument()
     expect(screen.getByText('-')).toBeInTheDocument()
 
-    jest.runOnlyPendingTimers()
+    act(() => jest.runOnlyPendingTimers())
     jest.useRealTimers()
+  })
+
+  it('shold add current location to homepage when click favorite button', async () => {
+    localStorage.clear()
+    const user = userEvent.setup()
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider>
+          <CityWeather />
+        </MantineProvider>
+      </QueryClientProvider>,
+    )
+
+    await user.click(screen.getByTestId('favorite'))
+
+    expect(localStorage.getItem('favoritedCities')).toEqual(
+      JSON.stringify(['Bangkok,TH']),
+    )
   })
 })
