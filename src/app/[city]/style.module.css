@@ -7,11 +7,6 @@
   border-bottom: 1px solid var(--mantine-color-gray-3);
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-}
-
 .content {
   padding: 16px;
   display: flex;

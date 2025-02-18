@@ -49,7 +49,7 @@ export type OpenWeatherForecastResponse = {
   cod: string
   message: number
   cnt: number
-  list: Array<{
+  list: {
     dt: number
     main: {
       temp: number
@@ -62,12 +62,12 @@ export type OpenWeatherForecastResponse = {
       humidity: number
       temp_kf: number
     }
-    weather: Array<{
+    weather: {
       id: number
       main: string
       description: string
       icon: string
-    }>
+    }[]
     clouds: {
       all: number
     }
@@ -85,7 +85,7 @@ export type OpenWeatherForecastResponse = {
       pod: string
     }
     dt_txt: string
-  }>
+  }[]
   city: {
     id: number
     name: string

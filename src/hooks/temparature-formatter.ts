@@ -1,6 +1,9 @@
 import { useCallback } from 'react'
 import { useAppSettings } from './local-storage'
 
+/**
+ * Format temparature string based on selected unit in app settings.
+ */
 export function useTemparatureFormatter() {
   const [{ unitOfMeasurement }] = useAppSettings()
 

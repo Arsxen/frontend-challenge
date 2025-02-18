@@ -1,20 +1,32 @@
 'use client'
 
-import { ActionIcon, type ComboboxItem, Select } from '@mantine/core'
+import {
+  ActionIcon,
+  Autocomplete,
+  type ComboboxItem,
+  Select,
+} from '@mantine/core'
 import { useDebouncedCallback } from '@mantine/hooks'
-import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { FaGear, FaMagnifyingGlass } from 'react-icons/fa6'
-import { queryKey } from 'src/api/query-key'
+import { type PropsWithChildren, useState } from 'react'
+import { FaAngleLeft, FaMagnifyingGlass } from 'react-icons/fa6'
 import { useSearch } from 'src/hooks/api'
-import type { SearchResponse } from 'src/types/api'
 import { AppSettings } from '../app-settings'
 import style from './style.module.css'
 
-export function Navbar() {
+export function NavBackButton() {
+  return (
+    <ActionIcon variant="default" size="lg" component={Link} href="/">
+      <FaAngleLeft />
+    </ActionIcon>
+  )
+}
+
+export function NavSearchBar() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const search = searchParams.get('search')
+  const search = searchParams.get('search') ?? undefined
 
   const { data } = useSearch(search)
 
@@ -22,8 +34,8 @@ export function Navbar() {
     router.push(!value ? '/' : `/?search=${encodeURIComponent(value)}`)
   }, 500)
 
-  const onSelect = (_: unknown, option: ComboboxItem) => {
-    router.push(`/${encodeURIComponent(option.value)}`)
+  const onSubmit = (value: string) => {
+    router.push(`/${encodeURIComponent(value)}`)
   }
 
   const options =
@@ -33,18 +45,24 @@ export function Navbar() {
     })) ?? []
 
   return (
+    <Autocomplete
+      className={style['search-bar']}
+      placeholder="Enter city or zipcode"
+      defaultValue={search}
+      data={options}
+      onChange={onSearch}
+      rightSection={<FaMagnifyingGlass />}
+      rightSectionPointerEvents="none"
+      onOptionSubmit={onSubmit}
+      filter={({ options }) => options}
+    />
+  )
+}
+
+export function Navbar({ children }: PropsWithChildren) {
+  return (
     <div className={style.navbar}>
-      <Select
-        className={style['search-bar']}
-        placeholder="Enter city or zipcode"
-        data={options}
-        searchable
-        defaultSearchValue={search ?? undefined}
-        onSearchChange={onSearch}
-        onChange={onSelect}
-        rightSection={<FaMagnifyingGlass />}
-        rightSectionPointerEvents="none"
-      />
+      {children}
       <AppSettings />
     </div>
   )

@@ -1,19 +1,15 @@
 'use client'
 
 import { ActionIcon, Divider, Flex, Grid, Text, Title } from '@mantine/core'
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { FaAngleLeft, FaHeart, FaRegHeart } from 'react-icons/fa6'
-import { AppSettings } from 'src/components/app-settings'
+import { FaHeart, FaRegHeart } from 'react-icons/fa6'
+import { NavBackButton, Navbar } from 'src/components/navbar'
+import dayjs from 'src/extended-dayjs'
 import { useCurrentWeather, useWeatherForecast } from 'src/hooks/api'
 import { useAppSettings, useFavoritedCities } from 'src/hooks/local-storage'
 import { useTemparatureFormatter } from 'src/hooks/temparature-formatter'
 import style from './style.module.css'
-
-dayjs.extend(utc)
 
 export default function CityWeather() {
   const params = useParams()
@@ -43,13 +39,10 @@ export default function CityWeather() {
   }
 
   return (
-    <div className={style.container}>
-      <div className={style.navbar}>
-        <ActionIcon variant="default" size="lg" component={Link} href="/">
-          <FaAngleLeft />
-        </ActionIcon>
-        <AppSettings />
-      </div>
+    <>
+      <Navbar>
+        <NavBackButton />
+      </Navbar>
       <div className={style.content}>
         <div>
           <Flex justify="space-between">
@@ -143,6 +136,6 @@ export default function CityWeather() {
           </Grid.Col>
         </Grid>
       </div>
-    </div>
+    </>
   )
 }

@@ -7,7 +7,7 @@ import type {
 } from 'src/types/openweather'
 import { useAppSettings } from './local-storage'
 
-export function useSearch(search: string | null) {
+export function useSearch(search?: string) {
   const [{ unitOfMeasurement }] = useAppSettings()
   return useQuery<SearchResponse>({
     queryKey: queryKey.search(search ?? '', unitOfMeasurement),

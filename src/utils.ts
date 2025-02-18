@@ -1,3 +1,6 @@
+/**
+ * Remove duplicated items from array based on mapper
+ */
 export function uniqBy<T, U>(arr: readonly T[], mapper: (item: T) => U): T[] {
   const map = new Map<U, T>()
 

@@ -5,6 +5,7 @@
   padding: 16px;
   border-bottom: 1px solid var(--mantine-color-gray-3);
   height: 70px;
+  justify-content: space-between;
 }
 
 .search-bar {
